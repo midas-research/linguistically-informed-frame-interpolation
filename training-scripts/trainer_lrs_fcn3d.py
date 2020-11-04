@@ -30,17 +30,19 @@ from skimage.transform import resize
 # train_paths = (paths[:int(0.8*len(paths))])
 # test_paths = (paths[int(0.8*len(paths)):])
 
-with open('./lrs_eval_paths.txt') as f:
-    paths = f.readlines()
-shuffle(paths)
-test_paths  = paths
-test_paths = [path.strip() for path in test_paths]
-test_paths = [path for path in test_paths if '.mp4' in path]
+# with open('./lrs_eval_paths.txt') as f:
+#     paths = f.readlines()
+# shuffle(paths)
+# test_paths  = paths
+# test_paths = [path.strip() for path in test_paths]
+# test_paths = [path for path in test_paths if '.mp4' in path]
 # train_paths = (paths[:int(0.8*len(paths))])
 # test_paths = (paths[int(0.8*len(paths)):])
 train_paths = pd.read_csv('lrs_train_paths.csv')['location']
 train_paths = train_paths.tolist()
 train_paths = [path for path in train_paths if '.mp4' in path]
+train_paths = train_paths[:int(len(train_paths)*.80)]
+test_paths = train_paths[int(len(train_paths)*.80):]#validation set
 
 
 
